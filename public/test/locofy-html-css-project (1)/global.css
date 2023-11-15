@@ -1,0 +1,35 @@
+body {
+  margin: 0;
+  line-height: normal;
+}
+
+:root {
+  /* fonts */
+  --font-nunito: Nunito;
+  --font-open-sans: "Open Sans";
+  --font-inter: Inter;
+
+  /* font sizes */
+  --font-size-xs-6: 11.6px;
+
+  /* Colors */
+  --neutral-background-day: #fff;
+  --color-gray-100: #141415;
+  --neutral-primary-day: #0c0d0e;
+  --semantic-1-hyperlink-day: #0151fc;
+  --grey-secondary-130: #5b616e;
+  --neutral-secondary-day: #515961;
+  --border-normal-day: #dbdbdb;
+
+  /* Gaps */
+  --gap-mid-3: 17.3px;
+
+  /* Paddings */
+  --padding-4xs-7: 8.7px;
+  --padding-7xs-8: 5.8px;
+  --padding-xs-6: 11.6px;
+
+  /* Border radiuses */
+  --br-4xs-7: 8.7px;
+  --br-7xs-8: 5.8px;
+}
