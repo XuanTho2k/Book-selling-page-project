@@ -1,5 +1,5 @@
 <?php
-class User
+class UserModel
 {
     public function logIn($POST)
     {

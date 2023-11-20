@@ -1,6 +1,6 @@
 <?php
 
-class MainController
+class MainController 
 {
     protected function view($view,$data=[])
     {
@@ -13,7 +13,7 @@ class MainController
     protected function loadModel($model,...$args)
     {
         if(file_exists("../app/models/".$model.".php")){
-            include ("../app/models/".$model.".php");
+            include_once ("../app/models/".$model.".php");
             return new $model(...$args);
         } else {
             return false;

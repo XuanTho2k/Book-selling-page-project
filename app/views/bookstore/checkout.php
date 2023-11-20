@@ -1,4 +1,4 @@
-<?php include 'header.php' ?>
+
 
 
     <!-- Breadcrumb Start -->
@@ -200,4 +200,3 @@
     <!-- Checkout End -->
 
 
-   <?php include 'footer.php' ?> 

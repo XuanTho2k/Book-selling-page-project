@@ -7,7 +7,7 @@ class Login extends MainController
 
         if (isset($_POST['email'])) {
 
-            $user = $this->loadModel('user');
+            $user = $this->loadModel('userModel');
             $user->logIn($_POST);   
         }
         $this->view('login', $data);

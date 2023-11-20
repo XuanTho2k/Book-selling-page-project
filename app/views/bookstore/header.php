@@ -1,5 +1,4 @@
-<?php 
-
+<?php
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -245,7 +244,7 @@
                             ?>
                                 <span class="dropdown-item"> Hello, <?php echo $_SESSION['user_name'] ?></span>
                                 <a href="cart" class="dropdown-item">Your Cart</a>
-                                <a href="cart" class="dropdown-item">Your Bill</a>
+                                <a href="bill" class="dropdown-item">Your Bill</a>
                                 <?php if (isset($_SESSION['user_role'])) {
                                 ?>
                                     <a href="admin">Admin Dashboard</a>
@@ -279,7 +278,7 @@
                         <i class="fas fa-heart text-dark"></i>
                         <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
                     </a>
-                    <a href="" class="btn px-0 ml-2">
+                    <a href="cart" class="btn px-0 ml-2">
                         <i class="fas fa-shopping-cart text-dark"></i>
                         <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">0</span>
                     </a>
@@ -323,25 +322,41 @@
                     <i class="fa fa-angle-down text-dark"></i>
                 </a>
                 <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
-                    <div class="navbar-nav w-100">
-                        <div class="nav-item dropdown dropright">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dresses <i class="fa fa-angle-right float-right mt-1"></i></a>
-                            <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
-                                <a href="" class="dropdown-item">Men's Dresses</a>
-                                <a href="" class="dropdown-item">Women's Dresses</a>
-                                <a href="" class="dropdown-item">Baby's Dresses</a>
+                    <?php
+
+                    foreach ($data['header_cate'] as $row) {
+
+                        $parent_cate_id = $row->getId();
+                        $child_categories = $data['cate_model']->getChildCategory($parent_cate_id);
+                    ?>
+
+
+                        <div class="navbar-nav w-100">
+                            <div class="nav-item dropdown dropright">
+                                <a href="shop?cate_id=<?php echo $row->getId() ?>" class="nav-link dropdown-toggle" <?php if ($child_categories != null) {
+                                                                                                                        echo 'data-toggle="dropdown"';
+                                                                                                                    } ?>> <?php echo $row->getName() ?>
+                                    <?php if ($child_categories != null) { ?>
+                                        <i class="fa fa-angle-right float-right mt-1"></i>
+                                    <?php } ?>
+                                </a><?php
+                                    if ($child_categories != null) {
+                                    ?>
+                                    <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
+                                        <?php
+
+                                        foreach ($child_categories as $category) { ?>
+                                            <a href="shop?cate_id=<?php echo $category->getId() ?>" class="dropdown-item"><?php echo $category->getName() ?></a>
+
+                                    <?php }
+                                    } ?>
+                                    </div>
                             </div>
-                        </div>
-                        <?php 
-                        foreach ($data['header_cate'] as $row) {
+                        <?php
+                    }
                         ?>
 
-                        <a href="shop?cate_id=<?php echo $row->getId() ?>" class="nav-item nav-link"><?php echo $row->getName() ?></a>
-                            <?php 
-                            }
-                        ?>
-                       
-                    </div>
+                        </div>
                 </nav>
             </div>
             <div class="col-lg-9">
@@ -372,7 +387,7 @@
                                 <i class="fas fa-heart text-primary"></i>
                                 <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
                             </a>
-                            <a href="" class="btn px-0 ml-3">
+                            <a href="cart" class="btn px-0 ml-3">
                                 <i class="fas fa-shopping-cart text-primary"></i>
                                 <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
                             </a>

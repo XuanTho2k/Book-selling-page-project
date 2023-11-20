@@ -7,6 +7,7 @@ class App
 
     public function __construct()
     {
+
         $url = $this->splitURL();
 
         if (file_exists("../app/controller" . $url[0]) . "php") {
@@ -25,6 +26,7 @@ class App
         }
         $this->params = array_values($url);
         call_user_func_array([$this->controller, $this->method], $this->params);
+
     }
     private function splitURL()
     {

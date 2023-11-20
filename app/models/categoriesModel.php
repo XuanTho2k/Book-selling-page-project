@@ -8,7 +8,7 @@ class Category
     private $capacity;
     private $count;
     private $parent_cate_id;
-    public function __construct($id, $name, $description, $img, $capacity, $count,$parent_cate_id)
+    public function __construct($id, $name, $description, $img, $capacity, $count, $parent_cate_id)
     {
         $this->id = $id;
         $this->name = $name;
@@ -138,7 +138,7 @@ class CategoriesModel
         $query = "select * from categories where parent_cate_id IS NULL";
 
         $data = $db->read($query);
-        $data = json_decode(json_encode($data),true);
+        $data = json_decode(json_encode($data), true);
         $categories = array();
         foreach ($data as $row) {
             $category = new Category(
@@ -149,10 +149,61 @@ class CategoriesModel
                 $row['cate_capacity'],
                 $row['cate_open'],
                 $row['parent_cate_id']
-                
+
             );
             $categories[] = $category;
         }
         return $categories;
     }
+    public function getChildCategory($parent_id)
+    {
+        $db = new Database();
+        $query = "select b.* from categories as a left join categories as b on a.cate_id = b.parent_cate_id where b.parent_cate_id = :id";
+        $arr['id'] = $parent_id;
+        $data = $db->read($query,$arr);
+        $data = json_decode(json_encode($data), true);
+        $child_categories = array();
+        if ($data != null) {
+        foreach($data as $row){
+            $category = new Category(
+                $row['cate_id'],
+                $row['cate_name'],
+                $row['cate_des'],
+                $row['cate_img'],
+                $row['cate_capacity'],
+                $row['cate_open'],
+                $row['parent_cate_id']
+
+            );
+            $child_categories[] = $category; 
+        }
+        } else {
+            return null;
+        }
+        return $child_categories;
+    }
+    public function getCategoryByBookId($book_id)
+    {
+        $db = new Database();
+        $query = "select c.* from book as a join book_cate as b on a.book_id = b.book_id join categories as c on b.cate_id = c.cate_id where a.book_id = :book_id";
+        $arr['book_id'] = $book_id;
+        $data = $db->read($query,$arr);
+        $data = json_decode(json_encode($data),true);
+        $categories = array();
+        foreach ($data as $row){
+            $cate = new Category(
+                $row['cate_id'],
+                $row['cate_name'],
+                $row['cate_des'],
+                $row['cate_img'],
+                $row['cate_capacity'],
+                $row['cate_open'],
+                $row['parent_cate_id']
+            ); 
+            $categories[] = $cate;
+        }
+        return $categories;
+    }
+
+
 }
