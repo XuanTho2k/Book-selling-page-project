@@ -25,7 +25,7 @@ class Home extends MainController
         $data['book_recent'] = $book->getBookRecent();
         //get data for publisher
         $data['publisher_all'] = $publisher->getAllPublishers();
-        
+
         //rendering view
         $this->view("index", $data);
         $footer = new Footer();

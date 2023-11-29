@@ -39,6 +39,7 @@ class Database
     public function write($query, $data = [])
     {
         $db = $this->db_connect();
+        
         $stm = $db->prepare($query);
         if (count($data) == 0){
             $stm = $db->query($query);

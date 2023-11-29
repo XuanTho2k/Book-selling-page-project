@@ -160,23 +160,23 @@ class CategoriesModel
         $db = new Database();
         $query = "select b.* from categories as a left join categories as b on a.cate_id = b.parent_cate_id where b.parent_cate_id = :id";
         $arr['id'] = $parent_id;
-        $data = $db->read($query,$arr);
+        $data = $db->read($query, $arr);
         $data = json_decode(json_encode($data), true);
         $child_categories = array();
         if ($data != null) {
-        foreach($data as $row){
-            $category = new Category(
-                $row['cate_id'],
-                $row['cate_name'],
-                $row['cate_des'],
-                $row['cate_img'],
-                $row['cate_capacity'],
-                $row['cate_open'],
-                $row['parent_cate_id']
+            foreach ($data as $row) {
+                $category = new Category(
+                    $row['cate_id'],
+                    $row['cate_name'],
+                    $row['cate_des'],
+                    $row['cate_img'],
+                    $row['cate_capacity'],
+                    $row['cate_open'],
+                    $row['parent_cate_id']
 
-            );
-            $child_categories[] = $category; 
-        }
+                );
+                $child_categories[] = $category;
+            }
         } else {
             return null;
         }
@@ -187,10 +187,10 @@ class CategoriesModel
         $db = new Database();
         $query = "select c.* from book as a join book_cate as b on a.book_id = b.book_id join categories as c on b.cate_id = c.cate_id where a.book_id = :book_id";
         $arr['book_id'] = $book_id;
-        $data = $db->read($query,$arr);
-        $data = json_decode(json_encode($data),true);
+        $data = $db->read($query, $arr);
+        $data = json_decode(json_encode($data), true);
         $categories = array();
-        foreach ($data as $row){
+        foreach ($data as $row) {
             $cate = new Category(
                 $row['cate_id'],
                 $row['cate_name'],
@@ -199,11 +199,49 @@ class CategoriesModel
                 $row['cate_capacity'],
                 $row['cate_open'],
                 $row['parent_cate_id']
-            ); 
+            );
             $categories[] = $cate;
         }
         return $categories;
     }
 
+    public function updateCategory($data)
+    {
+        $db = new Database();
+        if ($_FILES['img']['error'] == 4) {
+            $query = "update categories set cate_id = :id, cate_name = :name where cate_id = :hidden_id";
+        } else {
+            $arr['img_name'] = $_FILES['img']['name'];
+            $arr['img_type'] = $_FILES['img']['type'];
 
+            move_uploaded_file($arr['img_type'], ASSETS . "bookstore/img/" . $arr['img_name']);
+            $query = "update categories set cate_id = :id, cate_name = :name, cate_img =:img where cate_id = :hidden_id";
+        }
+        $arr['id'] = $data['id'];
+        $arr['name'] = $data['name'];
+        $arr['hidden_id'] = $data['old_id'];
+        $db->write($query, $arr);
+    }
+    public function insertCategory($data)
+    {
+        $db = new Database();
+        $query = "INSERT INTO `categories` (`cate_id`, `cate_name`, `cate_img`, `cate_des`, `cate_capacity`, `cate_open`, `parent_cate_id`)
+        VALUES (:id, :name, :img, :des, null, null, :parent)";
+        $arr['id'] = $data['id'];
+        $arr['name'] = $data['name'];
+        $arr['des'] = $data['des'];
+        $arr['parent'] = $data['parent'];
+        $arr['img'] = $_FILES['img']['name'];
+        $img_type = $_FILES['img']['type'];
+
+        move_uploaded_file($img_type, ASSETS."bookstore/img/".$arr['img']);
+        $db->write($query,$arr);
+    }
+    public function deleteCategory($id)
+    {
+        $db = new Database();
+        $query = "DELETE FROM `categories` WHERE cate_id = :id";
+        $arr['id'] = $id;
+        $db->write($query,$arr);
+    }
 }

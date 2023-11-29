@@ -13,6 +13,7 @@
     <!-- Favicon -->
     <link href="<?php echo ASSETS ?>/bookstore/img/favicon.ico" rel="icon">
 
+
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
@@ -389,7 +390,7 @@
                             </a>
                             <a href="cart" class="btn px-0 ml-3">
                                 <i class="fas fa-shopping-cart text-primary"></i>
-                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
+                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;"><?php echo $data['cart_num'] ?></span>
                             </a>
                         </div>
                     </div>

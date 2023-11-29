@@ -59,6 +59,25 @@ class AuthorModel
         }
         return $authors;
     }
+    public function addNewAuthor($data)
+    {
+        $db = new Database();
+        $query = "INSERT INTO `author`( `author_name`) VALUES (:name)";
+        $db->write($query,$data);
+    }
+    public function deleteAuthor($id)
+    {
+        $db = new Database();
+        $query = "DELETE FROM author where author_id = :id";
+        $arr['id'] = $id;
+        $db->write($query,$arr);
+    }
+    public function updateAuthor($data)
+    {
+        $db = new Database();
+        $query = "UPDATE `author` SET `author_name`= :name WHERE author_id = :hidden_id";
+        $db->write($query,$data);
+    }
 }
 
 ?>

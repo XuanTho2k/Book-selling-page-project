@@ -13,8 +13,7 @@ class App
         if (file_exists("../app/controller" . $url[0]) . "php") {
             $this->controller = strtoLower($url[0]);
             unset($url[0]);
-            
-        } 
+        }
         require "../app/controller/" . $this->controller . ".php";
 
         $this->controller = new $this->controller;
@@ -26,7 +25,6 @@ class App
         }
         $this->params = array_values($url);
         call_user_func_array([$this->controller, $this->method], $this->params);
-
     }
     private function splitURL()
     {

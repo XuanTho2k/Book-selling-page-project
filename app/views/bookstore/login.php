@@ -1,4 +1,4 @@
-<?php include 'header.php' ?>
+
 <div class="creat-account-by-email">
   <img style="left:0;" class="right-image-icon" alt="" src="<?php echo ASSETS ?>/bookstore/img/book-login.png" />
   <form action="" method="post">
@@ -78,4 +78,3 @@
     <div class="logo-text">BOOKLAND</div>
   </div>
 </div>
-<?php include 'footer.php' ?>

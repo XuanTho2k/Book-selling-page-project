@@ -115,16 +115,26 @@
 <div class="container-fluid pt-5 pb-3">
     <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Featured Products</span></h2>
     <div class="row px-xl-5">
-        <?php foreach ($data['book_all'] as $row) { ?>
+        <?php  foreach ($data['book_all'] as $row) {  ?>
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
                     <div class="product-img position-relative overflow-hidden">
                         <img class="img-fluid w-100" src="<?php echo ASSETS ?>bookstore/img/<?php echo $row->getImg() ?>" alt="">
                         <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href="detail?book_id=<?php echo $row->getId() ?>"><i class="fa fa-shopping-cart"></i></a>
+                            <form action="cart" method="post">
+                                <input type="hidden" name="price" value="<?php echo $row->getPrice() ?>">
+                                <input type="hidden" name="img" value="<?php echo $row->getImg() ?>">
+                                <input type="hidden" name="book-name" value="<?php echo $row->getName() ?>">
+
+
+                                <a class="btn btn-outline-dark btn-square" href="">
+                                    <input type="hidden" name="id" value="<?php echo $row->getId() ?>">
+                                <button type="submit" name="btn-add-to-cart"><i class="fa fa-shopping-cart"></i></button>
+                                </a>
+                            </form>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                            <a class="btn btn-outline-dark btn-square" href="detail?book_id=<?php echo $row->getId() ?>"><i class="fa fa-search"></i></a>
                         </div>
                     </div>
                     <div class="text-center py-4">
@@ -144,7 +154,7 @@
                     </div>
                 </div>
             </div>
-        <?php } ?>
+        <?php   } ?>
     </div>
 </div>
 <!-- Products End -->

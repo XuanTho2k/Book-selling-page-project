@@ -294,4 +294,64 @@ class BookModel
         }
         return $books;
     }
+
+    public function countAllBook()
+    {
+        $db = new Database();
+        $query = "select count(book_id) as book from book";
+
+        $data = $db->read($query);
+        $data = json_decode(json_encode($data), true);
+        return $data;
+    }
+    public function insertBook($data)
+    {
+        $db = new Database();
+        $query = "INSERT INTO `book`( `book_name`, `book_des`, `book_img`,
+        `book_date`, `book_price`, `book_author`, `book_quantity`,
+        `book_publisher`) VALUES
+        (:name, :des,:img,:date,:price,:author,:quantity,:publisher)";
+        $data['img'] = $_FILES['img']['name'];
+        var_dump($data);
+
+        echo $query;
+        $img_tmp = $_FILES['img']['type'];
+        echo $img_tmp;
+
+        move_uploaded_file($img_tmp, ASSETS."bookstore/img/".$data['img']);
+        $db->write($query, $data);  
+    }
+    public function deleteBook($id)
+    {
+        $db = new Database();
+        $query = "DELETE FROM `book` WHERE book_id = :id";
+        $arr['id'] = $id;
+        $db->write($query,$arr);
+    }
+    public function updateBook($data)
+    {
+        $db=new Database();
+        if ($_FILES['img']['error'] != 4)
+        {
+        $query = "UPDATE `book` SET `book_name`=
+        :name,`book_des`=:des,`book_img`=:img,`book_price`=
+        :price,`book_author`= :author,`book_publisher`= :publisher WHERE
+        book_id = :hidden_id";
+        $data['img'] = $_FILES['img']['name'];
+        $img_tmp = $_FILES['img']['type'];
+
+
+        move_uploaded_file($img_tmp,ASSETS."bookstore/img/".$data['img']);
+        } else {
+            $query = "UPDATE `book` SET `book_name`=
+        :name,`book_des`=:des,`book_price`=
+        :price,`book_author`= :author,`book_publisher`= :publisher
+        , `book_quantity` = :quantity
+         WHERE
+        book_id = :hidden_id";
+        }
+        var_dump($data);
+        echo $query;
+        $db->write($query,$data) ;
+    }
 }

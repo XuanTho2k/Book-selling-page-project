@@ -7,7 +7,8 @@ class LogOut extends MainController
         $data=[];
        $user = $this->loadModel('userModel');
        $user->logOut();
-       $this->view('index',$data);
+       //$this->view('index',$data);
+       header("location:home");
     }
 }
 

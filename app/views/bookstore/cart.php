@@ -28,111 +28,37 @@
                     </tr>
                 </thead>
                 <tbody class="align-middle">
-                    <tr>
-                        <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px;"> Product Name</td>
-                        <td class="align-middle">$150</td>
-                        <td class="align-middle">
-                            <div class="input-group quantity mx-auto" style="width: 100px;">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-minus">
-                                        <i class="fa fa-minus"></i>
-                                    </button>
+                    <?php foreach ($_SESSION['carts'] as $index => $book ) { ?>
+                        <tr>
+                            <td class="align-middle"><img src="<?php echo ASSETS ?>bookstore/img/<?php echo $book['img'] ?>" alt="" style="width: 50px;margin-left:0;"> <?php echo $book['name'] ?></td>
+                            <td class="align-middle">$<?php echo $book['price'] ?>.00</td>
+                            <td class="align-middle">
+                                <div class="input-group quantity mx-auto" style="width: 100px;">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-primary btn-minus">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                    <input type="text" class="form-control quantity-input form-control-sm bg-secondary border-0 text-center" value="1">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-primary btn-plus">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
                                 </div>
-                                <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="1">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-plus">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="align-middle">$150</td>
-                        <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
-                    </tr>
-                    <tr>
-                        <td class="align-middle"><img src="img/product-2.jpg" alt="" style="width: 50px;"> Product Name</td>
-                        <td class="align-middle">$150</td>
-                        <td class="align-middle">
-                            <div class="input-group quantity mx-auto" style="width: 100px;">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-minus">
-                                        <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                                <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="1">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-plus">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="align-middle">$150</td>
-                        <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
-                    </tr>
-                    <tr>
-                        <td class="align-middle"><img src="img/product-3.jpg" alt="" style="width: 50px;"> Product Name</td>
-                        <td class="align-middle">$150</td>
-                        <td class="align-middle">
-                            <div class="input-group quantity mx-auto" style="width: 100px;">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-minus">
-                                        <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                                <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="1">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-plus">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="align-middle">$150</td>
-                        <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
-                    </tr>
-                    <tr>
-                        <td class="align-middle"><img src="img/product-4.jpg" alt="" style="width: 50px;"> Product Name</td>
-                        <td class="align-middle">$150</td>
-                        <td class="align-middle">
-                            <div class="input-group quantity mx-auto" style="width: 100px;">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-minus">
-                                        <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                                <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="1">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-plus">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="align-middle">$150</td>
-                        <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
-                    </tr>
-                    <tr>
-                        <td class="align-middle"><img src="img/product-5.jpg" alt="" style="width: 50px;"> Product Name</td>
-                        <td class="align-middle">$150</td>
-                        <td class="align-middle">
-                            <div class="input-group quantity mx-auto" style="width: 100px;">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-minus">
-                                        <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                                <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="1">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-plus">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="align-middle">$150</td>
-                        <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button></td>
-                    </tr>
+                            </td>
+                            <td class="align-middle total-price"></td>
+                            <td class="align-middle">
+                                <form action="cart" method="post">
+                                <input type="hidden" name="index" value="<?php echo $index ?>">     
+
+                                    <button type="submit" name="btn-del-one-cart" class="btn btn-sm btn-danger">
+                                <i class="fa fa-times"></i></button></form>
+                            </td>
+                        </tr>
+                    <?php } ?>
+
+
                 </tbody>
             </table>
         </div>
@@ -156,15 +82,15 @@
                         <h6 class="font-weight-medium">Shipping</h6>
                         <div class="btn-group">
                             <form action="/action_page.php" method="get">
-                                <input list="browsers" name="browser" id="browser" placeholder="Choose Shipper">
-                                <datalist id="browsers">
-                                    <?php foreach($data['shipper_all'] as $row){ ?>
-                                    <option value="<?php echo $row->getName()?> - $<?php echo $row->getPrice() ?>.00">
-                                   <?php  } ?>
+                                <input list="ships" name="shipper" id="shipper" placeholder="Choose Shipper">
+                                <datalist id="ships">
+                                    <?php foreach ($data['shipper_all'] as $row) { ?>
+                                        <option value="<?php echo $row->getName() ?>">
+                                        <?php  } ?>
                                 </datalist>
                             </form>
                         </div>
-                        <h6 class="font-weight-medium">$10</h6>
+                        <h6 class="font-weight-medium price" id="price">$10</h6>
                     </div>
                 </div>
                 <div class="pt-2">
@@ -172,10 +98,16 @@
                         <h5>Total</h5>
                         <h5>$160</h5>
                     </div>
+                    <?php if(isset($_SESSION['user'])){ ?>
                     <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</button>
+                    <?php  } else { ?>
+                        <a href="login" class="btn btn-block btn-primary font-weight-bold my-3 py-3">Please Login to Checkout</a>
+
+                        <?php } ?>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <!-- Cart End -->
