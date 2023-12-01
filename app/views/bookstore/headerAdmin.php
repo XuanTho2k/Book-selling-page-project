@@ -31,6 +31,29 @@
 
     <!-- Template Stylesheet -->
     <link href="<?php echo ASSETS ?>bookstore/css/adminStyle.css" rel="stylesheet">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['e','w'],
+            <?php foreach ($data['cate'] as $row): ?>
+          ['<?php echo $row->getName() ?>', <?php echo $row->getCapacity() ?>],
+         <?php endforeach; ?> 
+         ['he','lo']
+
+        ]);
+
+        var options = {
+          title: 'My Daily Activities',
+          pieHole: 0.4,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+      }
+    </script>
 </head>
 
 <body>
@@ -79,6 +102,7 @@
             <a href="authorController" class="nav-item nav-link"><i class="fa-solid fa-user-pen"></i>Author</a>
             <a href="publisherController" class="nav-item nav-link"><i class="fa fa-user-tag me-2"></i>Publisher</a>
             <a href="shipperController" class="nav-item nav-link"><i class="fa fa-truck-fast me-2"></i>Shipper</a>
+            <a href="cmtAdmin" class="nav-item nav-link"><i class="fa fa-comment me-2"></i>Comment</a>
             <!-- 
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>

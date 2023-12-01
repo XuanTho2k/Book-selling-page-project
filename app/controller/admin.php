@@ -14,6 +14,9 @@ class Admin extends MainController
         $data['bill_total'] = $bill->countAllSale();
         $data['all_cmts'] = $cmt_M->countAllCmt();
         $data['all_books'] = $book_M->countAllBook();
+        $data['bill_all'] = $bill->getAllBill();
+        $data['bill_m'] = $bill;
+
         
         $header = new HeaderAdmin() ;
         $this->view('admindashboard',$data);

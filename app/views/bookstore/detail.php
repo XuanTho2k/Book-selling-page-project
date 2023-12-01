@@ -91,14 +91,26 @@ $book = $data['book_by_id'];
                             </button>
                         </div>
                         <input type="text" class="form-control bg-secondary border-0 text-center" value="1">
+                        <form action="cart" method="post">
                         <div class="input-group-btn">
+                            
                             <button class="btn btn-primary btn-plus">
                                 <i class="fa fa-plus"></i>
                             </button>
+                           
+                                <input type="hidden" name="price" value="<?php echo $book->getPrice() ?>">
+                                <input type="hidden" name="img" value="<?php echo $book->getImg() ?>">
+                                <input type="hidden" name="book-name" value="<?php echo $book->getName() ?>">
+
+                                <input type="hidden" name="id" value="<?php echo $book->getId() ?>">
+
+                               
+                            
                         </div>
                     </div>
-                    <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
+                    <button type="submit" name="btn-add-to-cart" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
                         Cart</button>
+                        </form>
                 </div>
                 <div class="d-flex pt-2">
                     <strong class="text-dark mr-2">Share on:</strong>
@@ -126,12 +138,12 @@ $book = $data['book_by_id'];
                 <div class="nav nav-tabs mb-4">
                     <a class="nav-item nav-link text-dark active" data-toggle="tab" href="#tab-pane-1">Description</a>
                     <!--  <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-2">Information</a> -->
-                    <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-3">Reviews (0)</a>
+                    <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-3">Reviews (<?php echo count($data['cmt_by_book_id']) ?>)</a>
                 </div>
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="tab-pane-1">
                         <h4 class="mb-3">Product Description</h4>
-                        <textarea style="width:100%;height:500px"><?php echo $book->getDes() ?></textarea>
+                        <textarea class="form-control" style="width:100%;height:500px"><?php echo $book->getDes() ?></textarea>
                     </div>
                     <!-- <div class="tab-pane fade" id="tab-pane-2">
                             <h4 class="mb-3">Additional Information</h4>
@@ -174,11 +186,14 @@ $book = $data['book_by_id'];
                     <div class="tab-pane fade" id="tab-pane-3">
                         <div class="row">
                             <div class="col-md-6">
-                                <h4 class="mb-4">1 review for "Product Name"</h4>
+                                <h4 class="mb-4">1 review for "<?php echo $book->getName() ?>"</h4>
+                                <?php foreach($data['cmt_by_book_id'] as $cmt): ?>
+
+                                <?php $user = $data['user_m']->getUserById($cmt->getUserId()) ?>
                                 <div class="media mb-4">
-                                    <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
+                                    <img src="<?php echo ASSETS ?>bookstore/img/<?php echo $user->getImg() ?>" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
                                     <div class="media-body">
-                                        <h6>John Doe<small> - <i>01 Jan 2045</i></small></h6>
+                                        <h6><?php echo $user->getName() ?><small> - <i><?php echo $cmt->getDate() ?></i></small></h6>
                                         <div class="text-primary mb-2">
                                             <i class="fas fa-star"></i>
                                             <i class="fas fa-star"></i>
@@ -186,9 +201,10 @@ $book = $data['book_by_id'];
                                             <i class="fas fa-star-half-alt"></i>
                                             <i class="far fa-star"></i>
                                         </div>
-                                        <p>Diam amet duo labore stet elitr ea clita ipsum, tempor labore accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.</p>
+                                        <p><?php echo $cmt->getText() ?></p>
                                     </div>
                                 </div>
+                                <?php endforeach; ?>
                             </div>
                             <div class="col-md-6">
                                 <h4 class="mb-4">Leave a review</h4>
@@ -203,18 +219,21 @@ $book = $data['book_by_id'];
                                         <i class="far fa-star"></i>
                                     </div>
                                 </div>
-                                <form>
+                                <form method="post">
                                     <div class="form-group">
+                                        <input type="hidden" name="cmt_user_id" value="<?php echo $_SESSION['user_id'] ?>">
+                                        <input type="hidden" name="cmt_book_id" value="<?php echo $book->getId() ?>">
+                                        <input type="hidden" name="cmt_date" value="<?php echo date('Y-m-d') ?>">
                                         <label for="message">Your Review *</label>
-                                        <textarea id="message" cols="30" rows="5" class="form-control"></textarea>
+                                        <textarea id="message" name="cmt_text" cols="30" rows="5" class="form-control"></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="name">Your Name *</label>
-                                        <input type="text" class="form-control" id="name">
+                                        <input type="text" class="form-control" id="name" value="<?php echo $_SESSION['user_name'] ?>">
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Your Email *</label>
-                                        <input type="email" class="form-control" id="email">
+                                        <input type="email" class="form-control" id="email" value="<?php echo $_SESSION['user_email'] ?>">
                                     </div>
                                     <div class="form-group mb-0">
                                         <input type="submit" value="Leave Your Review" class="btn btn-primary px-3">

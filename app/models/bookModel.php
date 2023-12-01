@@ -354,4 +354,29 @@ class BookModel
         echo $query;
         $db->write($query,$data) ;
     }
+    public function getBookByBill($bill_id)
+    {
+        $db = new Database();
+        $query = "SELECT c.* FROM bill as a join book_bill as b on a.bill_id = b.bill_id join book as c on b.book_id = c.book_id where a.bill_id = :bill_id";
+        $arr['bill_id'] = $bill_id;
+        $data = $db->read($query,$arr);
+        $data = json_decode(json_encode($data),true);
+        $books = array();
+        foreach($data as $row){
+            $book = new Book(
+                $row["book_id"],
+                $row["book_date"],
+                $row["book_name"],
+                $row["book_des"],
+                $row["book_img"],
+                $row["book_view"],
+                $row["book_price"],
+                $row["book_author"],
+                $row["book_quantity"],
+                $row["book_publisher"]
+            );
+            $books[] = $book;
+        }
+        return $books; 
+    }
 }

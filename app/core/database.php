@@ -56,5 +56,10 @@ class Database
             return false;
         }
     }
+    public function lastId()
+    {
+        $db = $this->db_connect();
+        return $db->lastInsertId();
+    }
 }
 ?>

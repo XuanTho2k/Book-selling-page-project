@@ -43,51 +43,36 @@
                             <label class="custom-control-label" for="price-all">All Price</label>
                             <span class="badge border font-weight-normal">1000</span>
                         </div>
+                        <?php $i=1; foreach( $data['publisher_all'] as $row): ?>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-1">
-                            <label class="custom-control-label" for="price-1">$0 - $100</label>
+                            <input type="checkbox" class="custom-control-input" name="publisher_id" value="<?php echo $row->getId() ?>" id="price-<?php echo $i ?>">
+                            <label class="custom-control-label" for="price-<?php echo $i; ?>"><?php echo $row->getName() ?></label>
                             <span class="badge border font-weight-normal">150</span>
                         </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-2">
-                            <label class="custom-control-label" for="price-2">$100 - $200</label>
-                            <span class="badge border font-weight-normal">295</span>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-3">
-                            <label class="custom-control-label" for="price-3">$200 - $300</label>
-                            <span class="badge border font-weight-normal">246</span>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-4">
-                            <label class="custom-control-label" for="price-4">$300 - $400</label>
-                            <span class="badge border font-weight-normal">145</span>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                            <input type="checkbox" class="custom-control-input" id="price-5">
-                            <label class="custom-control-label" for="price-5">$400 - $500</label>
-                            <span class="badge border font-weight-normal">168</span>
+                        <?php  $i++; endforeach; ?>
+                       <div>
+                        <button style="margin-top:10px;" type="submit" class="btn btn-warning">Search</button>
                         </div>
                     </form>
                 </div>
-                <!-- Price End -->
                 
                 <!-- Color Start -->
                 <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by Category</span></h5>
                 <div class="bg-light p-4 mb-30">
-                    <form>
+                    <form method="get">
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" checked id="color-all">
+                            <input type="checkbox" name="" value="" class="custom-control-input" checked id="color-all">
                             <label class="custom-control-label" for="price-all">All Category</label>
                             <span class="badge border font-weight-normal">1000</span>
                         </div>
                         <?php $i=1; foreach($data['cate_all'] as $row) { ?>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="color-<?php echo $i; ?>">
+                            <input type="checkbox" name="cate_id" value="<?php echo $row->getId() ?>" class="custom-control-input" id="color-<?php echo $i; ?>">
                             <label class="custom-control-label" for="color-<?php echo $i;?>"><?php echo $row->getName() ?></label>
                             <span class="badge border font-weight-normal"><?php echo $row->getCapacity() ?></span>
                         </div>
                         <?php  $i++;} ?>
+                       <button type="submit" class="btn btn-warning">Search</button> 
                     </form>
                 </div>
                 <!-- Color End -->
@@ -95,7 +80,7 @@
                 <!-- Size Start -->
                 <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by Author</span></h5>
                 <div class="bg-light p-4 mb-30">
-                    <form>
+                    <for>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                             <input type="checkbox" class="custom-control-input" checked id="size-all">
                             <label class="custom-control-label" for="size-all">All Author</label>
@@ -103,11 +88,12 @@
                         </div>
                         <?php $i=1; foreach($data['author_all'] as $row) { ?>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="size-<?php echo $i; ?>">
+                            <input type="checkbox" name="author_id" value="<?php ?>" class="custom-control-input" id="size-<?php echo $i; ?>">
                             <label class="custom-control-label" for="size-<?php echo $i; ?>"><?php echo $row->getName() ?></label>
                             <span class="badge border font-weight-normal"></span>
                         </div>
                        <?php $i++; } ?>
+                       <button type="submit" class="btn btn-warning">Search</button>
                     </form>
                 </div>
                 <!-- Size End -->

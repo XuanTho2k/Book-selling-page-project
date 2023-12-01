@@ -93,7 +93,7 @@
     <div class="row px-xl-5 pb-3">
         <?php foreach ($data['cate_all']  as $row) { ?>
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                <a class="text-decoration-none" href="">
+                <a class="text-decoration-none" href="shop?cate_id=<?php echo $row->getId() ?>">
                     <div class="cat-item d-flex align-items-center mb-4">
                         <div class="overflow-hidden" style="width: 100px; height: 100px;">
                             <img class="img-fluid" style="height: 130pxe;" src="<?php echo ASSETS ?>/bookstore/img/<?php echo $row->getImg() ?>" alt="">

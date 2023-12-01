@@ -161,6 +161,8 @@ class UserModel
     {
         unset($_SESSION['user_id']);
         unset($_SESSION['user_name']);
+        unset($_SESSION['user']);
+        
     }
     public function getAllUser()
     {
@@ -255,6 +257,10 @@ class UserModel
             $img_tmp = $_FILES['img']['type'];
 
             move_uploaded_file($img_tmp,ASSETS."bookstore/img/".$data['img']);
+        } else if (!isset($data['role'])) {
+            $query = "UPDATE `user` SET
+            `user_name`=:name,`user_email`=:email,`user_pw`=:pw,`user_tel`=:tel
+            WHERE user_id = :hidden_id";
         } else {
             $query = "UPDATE `user` SET
             `user_name`=:name,`user_email`=:email,`user_pw`=:pw,`user_role`=:role,`user_tel`=:tel

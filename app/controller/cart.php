@@ -28,7 +28,7 @@ class Cart extends MainController
         if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['btn-del-one-cart'])){
             $cart->delOneCart($_POST['index']);
         }
-
+        
         $data['shipper_all'] = $shipper->getAllShipper();
         $data['page_title'] = 'Cart';
         $this->view('cart',$data);

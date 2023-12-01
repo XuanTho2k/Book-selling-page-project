@@ -32,8 +32,11 @@ class Shop extends MainController
             $data['books'] = $book->getAllBook();
         }
 
+        
+
         $data['cate_all'] = $category->getCategories();
         $data['author_all']= $author->getAllAuthor();
+        $data['publisher_all'] = $publisher->getAllPublishers();
         //render view
         $this->view('shop', $data);
         $footer = new Footer();

@@ -10,6 +10,7 @@ class LogOut extends MainController
        //$this->view('index',$data);
        header("location:home");
     }
+
 }
 
 ?>
